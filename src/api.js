@@ -63,9 +63,6 @@ res.json({
 //   });
 // });
 app.use(`/.netlify/functions/api`, router);
-app.use('/proxy', createProxyMiddleware({ 
-  target: 'https://magenta-dragon-982ed6.netlify.app/.netlify/functions/api', 
-  changeOrigin: true 
-}));
+
 module.exports = app;
 module.exports.handler = serverless(app);
