@@ -51,14 +51,18 @@ res.json({
     message: response.data.choices[0].text
 
 })
+
+
+
+
+
+});
+
 router.get("/test", (req, res) => {
   res.json({
     hello: "test!"
   });
 });
 
-
-
-
-
-});
+module.exports = app;
+module.exports.handler = serverless(app);
