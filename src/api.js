@@ -4,6 +4,8 @@ const express  = require("express");
 const bodyParser = require("body-parser"); 
 const cors = require("cors"); 
 const serverless = require("serverless-http");
+const { createProxyMiddleware } = require('http-proxy-middleware');
+
 const configuration = new Configuration({
   organization: "org-tjef22dnv8eGxC6Ej7gwUS77",
   apiKey: "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",
@@ -61,6 +63,9 @@ res.json({
 //   });
 // });
 app.use(`/.netlify/functions/api`, router);
-
+app.use('/proxy', createProxyMiddleware({ 
+  target: 'https://magenta-dragon-982ed6.netlify.app/.netlify/functions/api', 
+  changeOrigin: true 
+}));
 module.exports = app;
 module.exports.handler = serverless(app);
